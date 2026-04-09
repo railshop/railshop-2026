@@ -11,6 +11,9 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Railshop | Digital Growth Partner for Home Services" description="We build high-performance websites and automated lead generation engines exclusively for local home service contractors.">
+	<Fragment slot="head">
+		<link rel="preload" href="/images/work/cedar_creek_hero.webp" as="image" type="image/webp" />
+	</Fragment>
 	<Navbar />
 	<main class="w-full flex flex-col pt-16 md:pt-20">
 		<Hero />
