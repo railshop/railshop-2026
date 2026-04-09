@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railshop Digital | Brand Guidelines</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Setup -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#38b6ff',
+                            dark: '#050505',
+                            mid: '#111111',
+                            light: '#e2e8f0',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* PDF Printing Logic */
+        @media print {
+            body { 
+                background-color: #050505 !important;
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light font-sans antialiased min-h-screen selection:bg-brand-primary/30">
+
+    <main class="max-w-5xl mx-auto px-8 py-16 md:py-24">
+        
+        <!-- Header -->
+        <header class="mb-24 border-b border-brand-light/10 pb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+            <div>
+                <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// BRAND SYSTEM</p>
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight text-white uppercase">Visual <br/><span class="text-brand-primary">Identity.</span></h1>
+            </div>
+            <div class="text-brand-light/60 max-w-sm text-sm font-light leading-relaxed">
+                <p>The definitive structural styling rules, color matrices, and typographic constraints powering Railshop.</p>
+            </div>
+        </header>
+
+        <!-- Logo Matrix -->
+        <section class="mb-24 page-break">
+            <h2 class="text-2xl font-bold uppercase tracking-wider mb-8 text-white flex items-center gap-4">
+                <span class="w-2 h-2 bg-brand-primary block"></span> 01. The Brand Mark
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Primary Dark -->
+                <div onclick="downloadSVG('primary-dark', '#e2e8f0', '#38b6ff')" class="bg-brand-mid border border-white/10 p-12 flex flex-col items-center justify-center relative group min-h-[300px] cursor-pointer hover:border-brand-primary/50 transition-colors">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-brand-primary/50 tracking-widest uppercase">PRIMARY (DARK)</div>
+                    <div class="text-4xl font-black tracking-widest text-white flex items-center uppercase relative transition-transform duration-500 group-hover:scale-105">
+                        RAILSHOP<span class="text-brand-primary relative top-[1px] -ml-[3px]">.</span>
+                    </div>
+                    <div class="absolute bottom-6 opacity-0 group-hover:opacity-100 font-mono text-[10px] text-brand-primary transition-opacity uppercase tracking-widest">[ CLICK TO DOWNLOAD .SVG ]</div>
+                </div>
+
+                <!-- Primary Light (Inverted Background) -->
+                <div onclick="downloadSVG('primary-light', '#050505', '#38b6ff')" class="bg-[#f0f4f8] border border-brand-dark/20 p-12 flex flex-col items-center justify-center relative group min-h-[300px] cursor-pointer hover:border-brand-primary/50 transition-colors">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-brand-dark/50 tracking-widest uppercase">INVERTED (LIGHT)</div>
+                    <div class="text-4xl font-black tracking-widest text-brand-dark flex items-center uppercase relative transition-transform duration-500 group-hover:scale-105">
+                        RAILSHOP<span class="text-brand-primary relative top-[1px] -ml-[3px]">.</span>
+                    </div>
+                    <div class="absolute bottom-6 opacity-0 group-hover:opacity-100 font-mono text-[10px] text-brand-primary transition-opacity uppercase tracking-widest">[ CLICK TO DOWNLOAD .SVG ]</div>
+                </div>
+
+                <!-- Mono White -->
+                <div onclick="downloadSVG('mono-white', '#ffffff', '#ffffff')" class="bg-[#222222] border border-white/10 p-12 flex flex-col items-center justify-center relative group min-h-[300px] cursor-pointer hover:border-white/30 transition-colors">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-white/50 tracking-widest uppercase">PUNCH-OUT (WHITE)</div>
+                    <div class="text-4xl font-black tracking-widest text-white flex items-center uppercase relative transition-transform duration-500 group-hover:scale-105">
+                        RAILSHOP<span class="text-white relative top-[1px] -ml-[3px]">.</span>
+                    </div>
+                    <div class="absolute bottom-6 opacity-0 group-hover:opacity-100 font-mono text-[10px] text-white/60 transition-opacity uppercase tracking-widest">[ CLICK TO DOWNLOAD .SVG ]</div>
+                </div>
+
+                <!-- Mono Dark -->
+                <div onclick="downloadSVG('mono-dark', '#050505', '#050505')" class="bg-brand-primary border border-brand-dark p-12 flex flex-col items-center justify-center relative group min-h-[300px] cursor-pointer hover:border-brand-dark/50 transition-colors">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-brand-dark/50 tracking-widest uppercase">MONOCHROMATIC (DARK)</div>
+                    <div class="text-4xl font-black tracking-widest text-brand-dark flex items-center uppercase relative transition-transform duration-500 group-hover:scale-105">
+                        RAILSHOP<span class="text-brand-dark relative top-[1px] -ml-[3px]">.</span>
+                    </div>
+                    <div class="absolute bottom-6 opacity-0 group-hover:opacity-100 font-mono text-[10px] text-brand-dark/60 transition-opacity uppercase tracking-widest">[ CLICK TO DOWNLOAD .SVG ]</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-brand-mid/50 border border-brand-primary/20 p-6 flex flex-col gap-2">
+                <p class="font-mono text-xs text-brand-primary tracking-widest uppercase mb-2">/// LOGO SPECIFICATIONS</p>
+                <p class="text-sm font-light leading-relaxed">The primary Railshop mark explicitly rejects traditional generic iconography in favor of absolute typographic purity. By stripping away visual bloat, the logo commands authority through brutal simplicity—ensuring that the performance, the infrastructure, and the work itself remain the absolute center of gravity.</p>
+            </div>
+        </section>
+
+        <!-- Spatial Marks (Social & Favicon) -->
+        <section class="mb-24 page-break">
+            <h2 class="text-2xl font-bold uppercase tracking-wider mb-8 text-white flex items-center gap-4">
+                <span class="w-2 h-2 bg-brand-primary block"></span> 02. Spatial Marks (Favicon & Social)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- The Primary Square -->
+                <div onclick="downloadMonogramSVG('dark', '#050505', '#ffffff', '#38b6ff')" class="bg-[#050505] border border-white/10 p-8 flex flex-col items-center justify-center relative group min-h-[250px] cursor-pointer hover:border-brand-primary/50 transition-colors">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-brand-primary/50 tracking-widest uppercase">THE 1:1 MATRIX</div>
+                    
+                    <div class="w-24 h-24 bg-brand-mid border border-white/5 flex items-center justify-center shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                        <div class="text-5xl font-black tracking-tight text-white flex items-center uppercase relative">
+                            R<span class="text-brand-primary relative">.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-6 opacity-0 group-hover:opacity-100 font-mono text-[10px] text-brand-primary transition-opacity uppercase tracking-widest">[ DOWNLOAD .SVG ]</div>
+                </div>
+
+                <!-- The Electric Stamp -->
+                <div onclick="downloadMonogramSVG('electric', '#38b6ff', '#050505', '#ffffff')" class="bg-brand-mid border border-brand-primary/20 p-8 flex flex-col items-center justify-center relative group min-h-[250px] cursor-pointer hover:border-brand-primary/80 transition-colors">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-brand-primary/50 tracking-widest uppercase">ELECTRIC STRIKE</div>
+                    
+                    <div class="w-24 h-24 bg-brand-primary flex items-center justify-center shadow-[0_0_30px_rgba(56,182,255,0.2)] transition-transform duration-500 group-hover:scale-105">
+                        <div class="text-5xl font-black tracking-tight text-brand-dark flex items-center uppercase relative">
+                            R<span class="text-white relative">.</span>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-6 opacity-0 group-hover:opacity-100 font-mono text-[10px] text-brand-primary/80 transition-opacity uppercase tracking-widest">[ DOWNLOAD .SVG ]</div>
+                </div>
+
+                <!-- The Favicon Use-Case -->
+                <div class="bg-[#020202] border border-white/5 p-8 flex flex-col items-center justify-center relative min-h-[250px]">
+                    <div class="absolute top-4 left-4 font-mono text-xs text-brand-light/40 tracking-widest uppercase">FAVICON DOM SIMULATION</div>
+                    
+                    <div class="w-full max-w-[200px] h-10 bg-[#121212] border-t border-x border-white/10 rounded-t-xl flex items-center px-4 gap-3 relative overflow-hidden shadow-2xl mt-4">
+                        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-primary/50 to-transparent"></div>
+                        <div class="w-4 h-4 flex items-center justify-center flex-shrink-0">
+                            <!-- 16px Simulated Vector -->
+                            <span class="text-white text-[12px] font-black leading-none flex items-center">R<span class="text-brand-primary">.</span></span>
+                        </div>
+                        <div class="text-[10px] font-mono text-white/50 truncate flex-1">RAILSHOP | Index</div>
+                    </div>
+                    <div class="text-xs font-mono tracking-widest text-brand-light/30 mt-6 text-center max-w-[200px] border-t border-brand-light/10 pt-4">LEGIBILITY AT 16x16 SCALAR</div>
+                </div>
+
+            </div>
+            
+            <div class="mt-8 bg-brand-mid/50 border border-brand-primary/20 p-6 flex flex-col gap-2">
+                <p class="font-mono text-xs text-brand-primary tracking-widest uppercase mb-2">/// SPATIAL MARK SPECIFICATIONS</p>
+                <p class="text-sm font-light leading-relaxed">The horizontal aspect ratio of the primary logo fundamentally breaks inside the 1:1 mathematical constraints of Favicons and standard Social Media UI bounds (Instagram, LinkedIn). To solve this, the text is compressed into a singular brutalist monogram (`R.`) engineered to fill pure geometric space while retaining the agency's primary typography and punctuation sign-off.</p>
+            </div>
+        </section>
+
+        <!-- Color Palette -->
+        <section class="mb-24 page-break">
+            <h2 class="text-2xl font-bold uppercase tracking-wider mb-8 text-white flex items-center gap-4">
+                <span class="w-2 h-2 bg-brand-primary block"></span> 03. Color Matrix
+            </h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Primary -->
+                <div class="flex flex-col">
+                    <div class="h-32 bg-brand-primary w-full shadow-[0_0_30px_rgba(56,182,255,0.15)] mb-4"></div>
+                    <p class="font-bold text-white tracking-widest uppercase text-sm mb-1">Electric Primary</p>
+                    <p class="font-mono text-xs text-brand-primary mb-2">HEX: #38b6ff</p>
+                    <p class="text-xs text-brand-light/60 font-light leading-relaxed">Used explicitly for interaction drivers, logo punctuation, and tactical hover states. Do not over-saturate layouts with this color.</p>
+                </div>
+                <!-- Dark -->
+                <div class="flex flex-col">
+                    <div class="h-32 bg-brand-dark w-full border border-white/10 shadow-lg mb-4"></div>
+                    <p class="font-bold text-white tracking-widest uppercase text-sm mb-1">Void Dark (Base)</p>
+                    <p class="font-mono text-xs text-brand-light/50 mb-2">HEX: #050505</p>
+                    <p class="text-xs text-brand-light/60 font-light leading-relaxed">The foundational canvas replacing pure black. Implements a slight offset to prevent OLED smearing while creating extreme contrast.</p>
+                </div>
+                <!-- Mid -->
+                <div class="flex flex-col">
+                    <div class="h-32 bg-brand-mid w-full border border-white/10 shadow-lg mb-4"></div>
+                    <p class="font-bold text-white tracking-widest uppercase text-sm mb-1">Structure Mid</p>
+                    <p class="font-mono text-xs text-brand-light/50 mb-2">HEX: #111111</p>
+                    <p class="text-xs text-brand-light/60 font-light leading-relaxed">Used internally to raise grid elements, feature cards, and structural architecture above the Void Dark baseline.</p>
+                </div>
+                <!-- Light -->
+                <div class="flex flex-col">
+                    <div class="h-32 bg-brand-light w-full shadow-lg mb-4"></div>
+                    <p class="font-bold text-white tracking-widest uppercase text-sm mb-1">Typography Fill</p>
+                    <p class="font-mono text-xs text-brand-light/50 mb-2">HEX: #e2e8f0</p>
+                    <p class="text-xs text-brand-light/60 font-light leading-relaxed">Replaces pure white for body copy to eliminate eye strain. Typically deployed at 60% opacity for subtext, and pure white for massive H1/H2s.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="mb-24 page-break">
+            <h2 class="text-2xl font-bold uppercase tracking-wider mb-8 text-white flex items-center gap-4">
+                <span class="w-2 h-2 bg-brand-primary block"></span> 04. Typography
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Sans -->
+                <div class="border border-white/10 bg-[#0a0a0a] p-10 flex flex-col">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
+                        <p class="font-mono text-sm tracking-widest text-brand-primary">OUTFIT (SANS-SERIF)</p>
+                        <p class="font-mono text-[10px] tracking-widest text-brand-light/40">WEIGHTS: 300, 400, 700, 900</p>
+                    </div>
+                    <h3 class="text-5xl font-black uppercase tracking-tight text-white mb-6">Built to<br> Dominate.</h3>
+                    <p class="font-light text-brand-light/60 leading-relaxed text-sm">
+                        Outfit operates as the primary structural communication driver. Headlines demand uppercase styling coupled with absolute maximum font-weight (900/black). Subtext heavily leverages font-light (300) to counter the massive headlines.
+                    </p>
+                    <div class="mt-8 pt-8 border-t border-white/10 font-mono text-[10px] text-brand-light/30 break-all uppercase leading-[2]">
+                        A B C D E F G H I J K L M N O P Q R S T U V W X Y Z <br> 0 1 2 3 4 5 6 7 8 9 @ # % & *
+                    </div>
+                </div>
+
+                <!-- Mono -->
+                <div class="border border-white/10 bg-[#0a0a0a] p-10 flex flex-col font-mono">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
+                        <p class="text-sm tracking-widest text-brand-primary">JETBRAINS (MONOSPACE)</p>
+                        <p class="text-[10px] tracking-widest text-brand-light/40">WEIGHTS: 400</p>
+                    </div>
+                    <p class="text-xl tracking-[0.2em] uppercase text-white mb-6">/// TACTICAL LABELS</p>
+                    <p class="font-sans font-light text-brand-light/60 leading-relaxed text-sm mb-6">
+                        The secondary monospace type stack serves specifically to provide tactical, systemic context. It must strictly utilize extensive positive letter-spacing (`tracking-widest` / `0.1em`) and capitalize structural prefixes.
+                    </p>
+                    <ul class="text-xs text-brand-primary/60 space-y-2 uppercase tracking-widest mt-auto border-l border-brand-primary/30 pl-4">
+                        <li>> SYS_INIT()</li>
+                        <li>> PHASE_BUILD_TRUE</li>
+                        <li>> RETURN_GROWTH</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Structural Architecture -->
+        <section class="mb-24 page-break">
+            <h2 class="text-2xl font-bold uppercase tracking-wider mb-8 text-white flex items-center gap-4">
+                <span class="w-2 h-2 bg-brand-primary block"></span> 05. Structural Styling
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Rules -->
+                <div class="col-span-1 md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-brand-mid border-l-2 border-brand-primary p-6">
+                        <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-2">Rigid Geometry</h4>
+                        <p class="text-xs text-brand-light/60 font-light leading-relaxed">Absolutely zero `border-radius` application. Every component strictly inherits a razor-sharp right angle structurally reflecting engineering schematics.</p>
+                    </div>
+                    <div class="bg-brand-mid border-l-2 border-brand-primary p-6">
+                        <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-2">Grid Boundaries</h4>
+                        <p class="text-xs text-brand-light/60 font-light leading-relaxed">Components operate inside overlapping structural grid lines generated via `border-white/10`, representing continuous, scalable blueprints.</p>
+                    </div>
+                    <div class="bg-brand-mid border-l-2 border-brand-primary p-6">
+                        <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-2">Hover Diagnostics</h4>
+                        <p class="text-xs text-brand-light/60 font-light leading-relaxed">Links and tactical arrays implement hyper-fast CSS transformations. Electric Blue overrides borders and specific prefixes upon cursor interaction.</p>
+                    </div>
+                </div>
+                
+                <!-- Example -->
+                <div class="col-span-1 md:col-span-3 p-12 bg-[#020202] border border-white/10 relative group transition-all duration-500 hover:border-brand-primary bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:1rem_1rem]">
+                    <div class="border-b border-white/5 pb-4 mb-6 flex justify-between items-center w-full">
+                        <p class="font-mono text-brand-primary/60 tracking-widest text-xs uppercase group-hover:text-brand-primary transition-colors">STRUCTURAL EXAMPLE</p>
+                        <span class="w-1.5 h-1.5 border border-brand-primary block"></span>
+                    </div>
+                    <h3 class="text-3xl font-black text-white uppercase mb-4 tracking-tight">Hover States <br/><span class="text-brand-primary/50">&</span> Feedback.</h3>
+                    <p class="text-brand-light/60 text-sm font-light max-w-lg mb-8 leading-relaxed">This architectural component actively integrates the Grid Boundary logic and Rigid Geometry rules. Hovering the container shifts diagnostic targets and triggers the Electric Primary border highlight.</p>
+                    
+                    <a href="#" class="inline-flex font-mono text-brand-light hover:text-brand-dark text-xs tracking-widest uppercase items-center gap-2 border border-white/20 px-6 py-4 hover:bg-brand-primary transition-all group/btn w-fit">
+                        [ DEPLOY NOW ]
+                        <svg class="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Client-Side SVG Download Engine -->
+    <script>
+        function downloadSVG(filename, textColor, dotColor) {
+            const svgMarkup = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="500" height="120">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+      .base-text { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 80px; letter-spacing: 0.1em; text-transform: uppercase; }
+      .dot-text { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 80px; }
+    </style>
+  </defs>
+  <text x="20" y="90" class="base-text" fill="${textColor}">RAILSHOP<tspan dy="1" dx="-5" class="dot-text" fill="${dotColor}">.</tspan></text>
+</svg>`;
+            
+            const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `railshop-${filename}.svg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadMonogramSVG(filename, bgColor, textColor, dotColor) {
+            const svgMarkup = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+      .base-text { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 85px; }
+      .dot-text { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 85px; }
+    </style>
+  </defs>
+  <rect width="120" height="120" fill="${bgColor}"/>
+  <!-- Using mathematical centering for strict 1:1 square layouts -->
+  <text x="48%" y="54%" text-anchor="middle" dominant-baseline="central" class="base-text" fill="${textColor}">R<tspan dx="2" dy="-2" class="dot-text" fill="${dotColor}">.</tspan></text>
+</svg>`;
+            
+            const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `railshop-1x1-${filename}.svg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

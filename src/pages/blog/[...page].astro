@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import BlogFeed from '../../components/BlogFeed.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths({ paginate }) {
+    const rawPosts = await getCollection('blog');
+    const sortedPosts = rawPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    
+    // Dispatch core array out at 9 cells per payload step
+    return paginate(sortedPosts, { pageSize: 9 });
+}
+
+// Intercept nested page node
+const { page } = Astro.props;
+---
+
+<Layout title="The Blog | Home Service Marketing Intelligence" description="Raw intelligence on exactly what works to scale local service operations. No agency fluff, just deployable strategies.">
+  <Navbar />
+  
+  <main class="w-full flex flex-col min-h-screen relative bg-brand-dark overflow-hidden">
+      <!-- Structural Grid Background -->
+      <div class="absolute inset-x-0 top-0 h-screen z-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,#111_0%,transparent_70%)]"></div>
+
+      <!-- Muted Hero Background -->
+      <div class="absolute inset-x-0 top-0 h-[600px] lg:h-[700px] z-0 pointer-events-none overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/20 via-brand-dark/80 to-brand-dark z-20"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-transparent to-brand-dark z-10"></div>
+          <img src="/images/hero/blog-hero.webp" alt="Railshop Blog Intelligence" class="w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity duration-1000 animate-fade-in" />
+      </div>
+
+      <!-- Hero Section -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-48 lg:pb-24 flex flex-col lg:flex-row items-center justify-between gap-12 border-b border-white/5">
+          
+          <!-- Left Column -->
+          <div class="w-full lg:w-8/12 animate-fade-in-up">
+              <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// THE BLOG</p>
+              <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-8">
+                  Straight <br class="hidden lg:block"/> Talk.
+              </h1>
+              <p class="text-brand-light/60 text-lg md:text-xl max-w-xl font-light">
+                  No agency fluff or empty buzzwords. Just raw intelligence on exactly what works to scale local service operations.
+              </p>
+          </div>
+
+          <!-- Right Column -->
+          <div class="hidden lg:flex w-full lg:w-4/12 flex-col justify-end lg:items-end gap-4 font-mono text-xs md:text-sm tracking-widest uppercase mt-8 lg:mt-0">
+              <p class="text-brand-primary/40 mb-2 border-b border-brand-primary/20 pb-4 w-full lg:text-right">[ DIRECTORY ]</p>
+              
+              <a href="#feed" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                  <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                  Recent Articles
+              </a>
+              <a href="/work" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                  <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                  Active Projects
+              </a>
+              <a href="/services" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                  <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                  Core Services
+              </a>
+          </div>
+      </div>
+
+      <!-- Feed Injection -->
+      <div id="feed" class="relative z-10">
+          <BlogFeed showHeader={false} showImages={true} showNav={true} page={page} />
+      </div>
+
+      <!-- CTA Module -->
+      <section class="relative w-full z-20 text-center bg-brand-primary border-t border-brand-mid mt-auto">
+          <div class="max-w-5xl mx-auto px-6 lg:px-8 w-full py-16 md:py-24">
+              <p class="font-mono text-brand-dark/60 tracking-[0.2em] text-sm mb-6 uppercase font-bold">/// NEXT STEPS</p>
+              <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-10 uppercase tracking-tight">Start your project.</h2>
+              <a href="/contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-white text-white hover:text-brand-dark px-8 md:px-10 py-5 font-bold font-mono tracking-widest text-sm shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 uppercase relative group z-30 w-full md:w-auto">
+                  [ BOOK A CALL ]
+              </a>
+          </div>
+      </section>
+
+  </main>
+  
+  <Footer />
+</Layout>

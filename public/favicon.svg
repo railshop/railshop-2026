@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+      .base-text { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 85px; }
+      .dot-text { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 85px; }
+    </style>
+  </defs>
+  <rect width="120" height="120" fill="#050505"/>
+  <!-- Using mathematical centering for strict 1:1 square layouts -->
+  <text x="48%" y="54%" text-anchor="middle" dominant-baseline="central" class="base-text" fill="#ffffff">R<tspan dx="2" dy="-2" class="dot-text" fill="#38b6ff">.</tspan></text>
+</svg>

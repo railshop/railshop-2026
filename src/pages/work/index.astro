@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Projects from '../../components/Projects.astro';
+import { getCollection } from 'astro:content';
+
+const allWork = await getCollection('portfolio');
+
+// Agency highlight metrics hardcoded into the infinite marquee
+const rawMetrics = [
+    "50+ SITES DEPLOYED",
+    "$100M+ MANAGED AD SPEND",
+    "8x BLENDED ROAS",
+    "4+ YR CLIENT TENURE",
+    "90% RETENTION RATE"
+];
+
+// Duplicate the array to ensure seamless infinite looping CSS animations
+const marqueeMetrics = [...rawMetrics, ...rawMetrics, ...rawMetrics, ...rawMetrics];
+
+// Generate 100 tactical grid cells for the interactive Hero matrix
+const gridSquares = Array.from({ length: 100 }, (_, i) => ({
+    id: i,
+    // Add random blinking to ~15% of the squares
+    isBlinking: Math.random() > 0.85,
+    delay: (Math.random() * 5).toFixed(2),
+    duration: (2 + Math.random() * 4).toFixed(2)
+}));
+---
+
+<Layout title="Our Work | Active Agency Portfolio" description="A direct look into the custom websites and marketing campaigns actively driving revenue for our home service clients.">
+  <Navbar />
+  
+  <main class="w-full flex flex-col min-h-screen relative bg-brand-dark overflow-hidden">
+      
+      <!-- Structural Grid Background -->
+      <div class="absolute inset-x-0 top-0 h-screen z-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,#111_0%,transparent_70%)]"></div>
+
+      <!-- Muted Hero Background -->
+      <div class="absolute inset-x-0 top-0 h-[600px] lg:h-[700px] z-0 pointer-events-none overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/20 via-brand-dark/80 to-brand-dark z-20"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-transparent to-brand-dark z-10"></div>
+          <img src="/images/hero/work-hero.webp" alt="Railshop Work Portfolio" class="w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity duration-1000 animate-fade-in" />
+      </div>
+
+      {/* Asymmetrical Directory Header with Jump Stack */}
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-48 lg:pb-24 flex flex-col lg:flex-row items-center justify-between gap-12 border-b border-white/5">
+          
+          {/* Left Column: Typography */}
+          <div class="w-full lg:w-5/12 flex flex-col items-start text-left">
+              <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// CASE STUDIES</p>
+              <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-8">
+                  Our <br class="hidden lg:block"/> Work.
+              </h1>
+              <p class="text-brand-light/60 text-lg md:text-xl max-w-xl font-light">
+                  We don't sell digital business cards. We build high-voltage lead generation engines for local businesses.
+              </p>
+          </div>
+
+          {/* Right Column: The Functional "Jump Stack" Navigation (Hidden on Mobile) */}
+          <div class="hidden lg:flex w-full lg:w-4/12 flex-col justify-end lg:items-end gap-4 font-mono text-xs md:text-sm tracking-widest uppercase mt-8 lg:mt-0">
+              <p class="text-brand-primary/40 mb-2 border-b border-brand-primary/20 pb-4 w-full lg:text-right">[ BROWSE PORTFOLIO ]</p>
+              
+              <a href="#work" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                  <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                  Active Case Studies
+              </a>
+              <a href="/services" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                  <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                  Explore Services
+              </a>
+              <a href="/contact" class="text-brand-primary hover:text-white transition-colors flex items-center justify-start lg:justify-end gap-3 group mt-6 pt-4 border-t border-white/5 w-full">
+                  <span class="w-1.5 h-1.5 bg-brand-primary group-hover:bg-white transition-colors"></span> 
+                  START A PROJECT
+              </a>
+          </div>
+      </div>
+
+      <!-- Infinite Performance Marquee (Cleanly attached to Hero border) -->
+      <section class="w-full relative py-6 border-b border-white/5 bg-[#020202] z-20 flex overflow-hidden">
+          <style>
+              @keyframes slide-infinite {
+                  0% { transform: translateX(0); }
+                  100% { transform: translateX(-50%); }
+              }
+              .animate-marquee-infinite {
+                  animation: slide-infinite 40s linear infinite;
+              }
+          </style>
+          <div class="flex whitespace-nowrap animate-marquee-infinite items-center gap-8 px-4 font-mono font-bold text-lg md:text-xl text-brand-light/40 tracking-widest uppercase hover:[animation-play-state:paused] transition-all">
+              {marqueeMetrics.map((metric) => (
+                  <span class="flex items-center gap-8 group/metric cursor-default">
+                      <span class="text-white group-hover/metric:text-brand-primary transition-colors">{metric}</span>
+                      <span class="text-brand-primary/40">///</span>
+                  </span>
+              ))}
+          </div>
+      </section>
+
+      <!-- Unlocked Global Database Projects Map -->
+      <Projects limit={false} customHeadline="The Portfolio." customSubhead="A direct look into the marketing campaigns and websites actively driving revenue for our clients." />
+
+      <!-- INVERTED CTA END-CAP -->
+      <section class="relative w-full z-20 text-center bg-brand-primary border-t border-brand-mid">
+          <div class="max-w-5xl mx-auto px-6 lg:px-8 w-full py-16 md:py-24">
+              <p class="font-mono text-brand-dark/60 tracking-[0.2em] text-sm mb-6 uppercase font-bold">/// NEXT STEPS</p>
+              <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-10 uppercase tracking-tight">Start your project.</h2>
+              <a href="/contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-white text-white hover:text-brand-dark px-8 md:px-10 py-5 font-bold font-mono tracking-widest text-sm shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 uppercase relative group z-30 w-full md:w-auto">
+                  [ BOOK A CALL ]
+              </a>
+          </div>
+      </section>
+  </main>
+
+  <Footer />
+</Layout>

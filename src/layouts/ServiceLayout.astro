@@ -1,0 +1,285 @@
+---
+import BaseLayout from './Layout.astro';
+// Reload
+
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Projects from '../components/Projects.astro';
+import ServiceIllustration from '../components/ServiceIllustration.astro';
+
+const { frontmatter } = Astro.props;
+
+// Resolve safe active tag for Portfolio mapping
+const activeServiceSlug = frontmatter.id || Astro.url.pathname.replace(/\/$/, '').split('/').pop();
+---
+
+<BaseLayout title={frontmatter.seoTitle || `${frontmatter.title} | Railshop`} description={frontmatter.seoDescription || frontmatter.description}>
+    <Fragment slot="head">
+        <!-- Dynamic Service Graph Identity -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": frontmatter.title,
+            "provider": {
+                "@type": "ProfessionalService",
+                "name": "Railshop"
+            },
+            "description": frontmatter.description,
+            "areaServed": {
+                "@type": "Country",
+                "name": "United States"
+            }
+        })} />
+        <!-- Dynamic FAQ Rich Snippets -->
+        {frontmatter.faq && frontmatter.faq.length > 0 && (
+            <script type="application/ld+json" set:html={JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": frontmatter.faq.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": item.answer
+                    }
+                }))
+            })} />
+        )}
+    </Fragment>
+	<Navbar />
+    
+    <main class="w-full flex flex-col min-h-screen relative bg-brand-dark overflow-hidden">
+        {/* Structural Grid Background */}
+        <div class="fixed inset-0 z-0 opacity-10 pointer-events-none">
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_20%,transparent_100%)]"></div>
+        </div>
+
+        <!-- SVG Watermark Background -->
+        <div class="absolute inset-x-0 top-0 h-[600px] lg:h-[700px] z-0 pointer-events-none overflow-hidden flex items-center justify-center">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/20 via-brand-dark/80 to-brand-dark z-20"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/20 via-transparent to-brand-dark z-10"></div>
+            <!-- The massive faint SVG inside the background wrapper -->
+            <div class="absolute inset-0 mix-blend-luminosity grayscale animate-fade-in flex items-center justify-center text-white pointer-events-none opacity-[0.15] [&_div]:!opacity-100 [&_div]:!mix-blend-normal [&_div]:!p-0 [&_svg]:!max-w-none [&_svg]:!max-h-none">
+               <div class="w-[120%] h-[120%] md:w-[130%] md:h-[130%] transform md:-translate-y-12 flex items-center justify-center">
+                   <ServiceIllustration serviceId={activeServiceSlug} />
+               </div>
+            </div>
+        </div>
+
+        <!-- Hero Section (Core Pages Layout) -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-48 lg:pb-24 flex flex-col lg:flex-row items-center justify-between gap-12 border-b border-white/5">
+            <!-- Left Column -->
+            <div class="w-full lg:w-8/12 animate-fade-in-up">
+                <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// SYSTEM: {frontmatter.systemCode}</p>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-8 leading-[1.05] break-words hyphens-auto">
+                    {frontmatter.title}
+                </h1>
+                <p class="text-brand-light/60 text-lg md:text-xl max-w-xl font-light">
+                    {frontmatter.description}
+                </p>
+            </div>
+
+            <!-- Right Column: Functional Jump Stack -->
+            <div class="hidden lg:flex w-full lg:w-4/12 flex-col justify-end lg:items-end gap-4 font-mono text-xs md:text-sm tracking-widest uppercase mt-8 lg:mt-0">
+                <p class="text-brand-primary/40 mb-2 border-b border-brand-primary/20 pb-4 w-full lg:text-right">[ DIRECTORY ]</p>
+                
+                <a href="#overview" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                    <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                    Overview
+                </a>
+                <a href="#tech-stack" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                    <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                    The Tech Stack
+                </a>
+                <a href="#process" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                    <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                    Build Sequence
+                </a>
+                <a href="#faq" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                    <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                    Common Questions
+                </a>
+            </div>
+        </div>
+
+        <!-- Markdown Slot (Rendered content from .md) -->
+        <section id="overview" class="w-full relative py-24 md:py-32 z-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 relative">
+                    
+                    <div class="lg:col-span-4 relative z-20 hidden md:block">
+                        <div class="sticky top-32">
+                            <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// STRATEGY BRIEF</p>
+                            <h2 class="text-2xl md:text-3xl font-black text-white uppercase mb-6">Service Overview</h2>
+                            <div class="w-full h-[1px] bg-white/10 mb-6"></div>
+                            <div class="inline-flex items-center gap-3 px-4 py-3 bg-[#020202] border border-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-brand-light/60 text-xs font-mono uppercase tracking-widest block w-full">
+                                STATUS: <span class="text-brand-primary">ACTIVE DEPLOYMENT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-8 relative z-20">
+                        {/* Massive System Code Watermark */}
+                        <div class="absolute -right-12 top-0 text-[120px] md:text-[180px] font-black text-white/[0.02] tracking-tighter leading-none pointer-events-none uppercase rotate-[-2deg] select-none text-right w-full">
+                            {frontmatter.systemCode}
+                        </div>
+
+                        <div class="prose prose-invert prose-brand max-w-none relative z-10
+                            prose-headings:text-white prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight
+                            prose-h2:text-3xl md:prose-h2:text-4xl prose-h2:mb-6 prose-h2:mt-16 prose-h2:text-brand-primary
+                            prose-p:text-brand-light/70 prose-p:text-lg md:prose-p:text-[21px] prose-p:leading-[1.7] prose-p:mb-8 prose-p:font-light
+                            prose-code:font-mono prose-code:text-brand-primary prose-code:bg-brand-primary/10 prose-code:px-2 prose-code:py-1
+                            prose-strong:text-white prose-strong:font-bold prose-strong:bg-white/5 prose-strong:px-1
+                            prose-blockquote:border-l-4 prose-blockquote:border-brand-primary prose-blockquote:bg-white/5 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic prose-blockquote:text-brand-light/80
+                            ">
+                            <slot />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Layout Components -->
+        
+        <!-- The Tech Stack (TERMINAL WINDOW LAYOUT) -->
+        <section id="tech-stack" class="relative w-full py-24 z-20 border-t border-brand-mid">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="mb-12">
+                    <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// TECHNOLOGY STACK</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-white uppercase mb-6">Technical Specifications.</h2>
+                    <div class="max-w-3xl">
+                        <p class="text-brand-light/60 text-base md:text-lg leading-relaxed font-light">
+                            {frontmatter.techSubtext || "We deploy enterprise-grade infrastructure built strictly for speed, security, and maximum performance."}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full bg-[#020202] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden">
+                    <div class="border-b border-white/10 bg-brand-dark/90 py-3 px-6 flex items-center gap-4">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                        </div>
+                        <div class="font-mono text-xs text-brand-light/40">railshop@systems ~/deploy/stack</div>
+                    </div>
+                    
+                    <div class="p-6 md:p-10">
+                        <table class="w-full text-left font-mono text-sm md:text-base border-collapse">
+                            <tbody>
+                                {frontmatter.techStack && frontmatter.techStack.length > 0 ? frontmatter.techStack.map((stack) => (
+                                    <tr class="border-b border-white/5 group hover:bg-brand-mid/30 transition-colors">
+                                        <td class="py-6 px-4 w-12 text-brand-primary whitespace-nowrap">>_</td>
+                                        <td class="py-6 px-4 w-12" set:html={stack.svg} />
+                                        <td class="py-6 px-4 font-bold text-white uppercase tracking-wider whitespace-nowrap">{stack.name}</td>
+                                        <td class="py-6 px-4 text-brand-light/40 uppercase hidden sm:table-cell w-full">-- {stack.role}</td>
+                                        <td class="py-6 px-4 text-brand-primary text-xs uppercase text-right whitespace-nowrap">[{stack.status}]</td>
+                                    </tr>
+                                )) : (
+                                    <tr class="border-b border-white/5 group hover:bg-brand-mid/30 transition-colors">
+                                        <td colspan="5" class="py-6 px-4 text-brand-light/50 font-mono text-center">NO TECHNICAL SPECIFICATIONS DETECTED.</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service-Specific Process (VERTICAL TIMELINE) -->
+        <section id="process" class="bg-[#020202] w-full py-24 z-20 relative border-t border-brand-mid overflow-hidden">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 w-full">
+                <div class="mb-20 text-center relative z-20">
+                    <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// THE PROCESS</p>
+                    <h2 class="text-3xl md:text-5xl font-black text-white uppercase bg-[#020202] inline-block px-4">The Build Sequence.</h2>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-px bg-brand-primary/20 shadow-[0_0_15px_rgba(56,182,255,0.5)] transform md:-translate-x-px"></div>
+                    
+                    {(frontmatter.buildSequence || [
+                        { num: "01", phase: "DISCOVERY & AUDIT", desc: "We dissect local competitor frameworks to identify structural weaknesses we can outrank. We establish baseline performance metrics." },
+                        { num: "02", phase: "ARCHITECTURE", desc: "Wireframing the psychological conversion path. Establishing the grid, the typography variables, and the exact visual hierarchy." },
+                        { num: "03", phase: "DEPLOYMENT", desc: "Build execution, automated Lighthouse optimization testing, and final launch via our high-speed global edge network." }
+                    ]).map((step, i) => (
+                        <div class={`relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8 mb-20 last:mb-0 group ${i % 2 !== 0 ? 'md:flex-row-reverse text-left md:text-right' : 'text-left'}`}>
+                            
+                            <div class="flex-1 w-full pl-24 md:pl-0 block md:hidden">
+                                <h3 class="text-xl font-bold text-brand-primary uppercase tracking-wide mb-2">PHASE {step.num}: {step.phase}</h3>
+                                <p class="text-brand-light/60 text-sm leading-relaxed">{step.desc}</p>
+                            </div>
+
+                            <div class={`flex-1 w-full hidden md:block ${i % 2 !== 0 ? 'pl-16' : 'pr-16 text-right'}`}>
+                                <h3 class="text-xl font-bold text-white uppercase tracking-wide mb-3 group-hover:text-brand-primary transition-colors">PHASE {step.num}: {step.phase}</h3>
+                                <p class="text-brand-light/50 text-base leading-relaxed">{step.desc}</p>
+                            </div>
+
+                            <div class="absolute left-6 md:relative md:left-0 w-12 h-12 bg-[#020202] border-2 border-brand-primary rounded-none flex items-center justify-center font-mono text-brand-primary font-bold shadow-[0_0_15px_rgba(56,182,255,0.4)] md:shrink-0 transform rotate-45 group-hover:bg-brand-primary group-hover:text-brand-dark transition-all duration-300">
+                                <span class="-rotate-45 block">{step.num}</span>
+                            </div>
+
+                            <div class="flex-1 hidden md:block"></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- RESTORED PROJECTS SECTION -->
+        <Projects filterTag={activeServiceSlug} />
+
+        <!-- FAQ (Interactive Accordion) -->
+        <section id="faq" class="relative w-full py-24 z-20 border-t border-brand-mid">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 w-full text-center">
+                <div class="mb-12">
+                    <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// FAQ</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-white uppercase mb-4">Common Questions.</h2>
+                </div>
+                
+                <div class="space-y-4 text-left">
+                    {(frontmatter.faq || [
+                        { question: "Do you use templates?", answer: "No. Every digital asset is custom-built from the ground up. Templates are bloated, slow, and bleed conversion opportunities." },
+                        { question: "What is your typical launch timeline?", answer: "Standard deployment takes 4 to 8 weeks depending on the scope of the project and system complexity." },
+                        { question: "Will I have control over the system?", answer: "Yes. We integrate Headless CMS architecture allowing your team to update content securely without risking structural integrity." }
+                    ]).map((item, i) => (
+                        <details class="group border border-white/10 bg-[#020202] open:bg-brand-mid/30 transition-colors overflow-hidden">
+                            <summary class="flex justify-between items-center p-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-brand-mid/30 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <span class="font-mono text-brand-primary/40 text-xs w-8 hidden md:inline-block">0{i+1}</span>
+                                    <h4 class="text-base md:text-lg font-bold text-white uppercase tracking-wide">{item.question}</h4>
+                                </div>
+                                <div class="shrink-0 w-8 h-8 flex items-center justify-center border border-white/10 group-open:border-brand-primary/50 group-open:bg-brand-primary/10 transition-colors">
+                                    <svg class="w-4 h-4 text-brand-primary transition-transform duration-300 group-open:-rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            
+                            <div class="p-6 md:p-8 pt-2 block border-t border-white/5 md:pl-20">
+                                <div class="font-mono text-brand-light/40 text-[10px] tracking-[0.2em] mb-4 uppercase flex items-center gap-2">
+                                   <span class="w-1.5 h-1.5 border border-brand-light/40 inline-block"></span> RESPONSE
+                                </div>
+                                <p class="text-brand-light/80 text-base leading-relaxed font-light">{item.answer}</p>
+                            </div>
+                        </details>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- INVERTED CTA END-CAP -->
+        <section class="relative w-full z-20 text-center bg-brand-primary border-t border-brand-mid">
+            <div class="max-w-5xl mx-auto px-6 lg:px-8 w-full py-16 md:py-24">
+                <p class="font-mono text-brand-dark/60 tracking-[0.2em] text-sm mb-6 uppercase font-bold">/// NEXT STEPS</p>
+                <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-12 uppercase tracking-tight">Start your project.</h2>
+                <a href="/contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-white text-white hover:text-brand-dark px-12 py-6 font-bold font-mono tracking-widest text-lg shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 uppercase relative group z-30 w-full sm:w-auto">
+                    [ BOOK A CALL ]
+                </a>
+            </div>
+        </section>
+    </main>
+
+	<Footer />
+</BaseLayout>

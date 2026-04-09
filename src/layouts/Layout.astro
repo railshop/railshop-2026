@@ -1,0 +1,70 @@
+---
+import '@fontsource-variable/outfit';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+}
+
+const { 
+	title, 
+	description = "Railshop - High-end Web Design, Paid Ads, SEO, and AI Integration.",
+	image = "/og-image.jpg"
+} = Astro.props;
+
+const ogImageUrl = image.startsWith('http') ? image : `https://www.railshop.co${image}`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth bg-brand-dark text-brand-light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={`https://www.railshop.co${Astro.url.pathname}`} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={`https://www.railshop.co${Astro.url.pathname}`} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImageUrl} />
+		
+		<!-- Global Knowledge Graph Identity -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "ProfessionalService",
+			"name": "Railshop",
+			"image": "https://www.railshop.co/og-image.jpg",
+			"url": "https://www.railshop.co",
+			"telephone": "", 
+			"address": {
+				"@type": "PostalAddress",
+				"streetAddress": "33 East Pittsburgh St.",
+				"addressLocality": "Greensburg",
+				"addressRegion": "PA",
+				"postalCode": "15601",
+				"addressCountry": "US"
+			},
+			"sameAs": [
+				"https://www.linkedin.com/company/railshopco",
+				"https://www.instagram.com/railshopco"
+			]
+		})} />
+		<slot name="head" />
+	</head>
+	<body class="antialiased selection:bg-brand-primary selection:text-brand-dark flex flex-col min-h-screen">
+		<slot />
+	</body>
+</html>

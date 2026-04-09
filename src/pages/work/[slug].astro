@@ -1,0 +1,268 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('portfolio');
+  return cases.map(entry => ({
+    params: { slug: entry.id }, props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Fetch adjacent deployments for cross-linking
+const allProjects = await getCollection('portfolio');
+const relatedProjects = allProjects.filter(p => p.id !== entry.id).slice(0, 2);
+---
+<Layout title={`${entry.data.title} | Case Study`}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.railshop.co"
+      }, {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Work",
+        "item": "https://www.railshop.co/work"
+      }, {
+        "@type": "ListItem",
+        "position": 3,
+        "name": entry.data.title,
+        "item": `https://www.railshop.co/work/${entry.id}`
+      }]
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": entry.data.title,
+      "description": entry.data.description,
+      "url": `https://www.railshop.co/work/${entry.id}`,
+      "publisher": {
+        "@type": "ProfessionalService",
+        "name": "Railshop"
+      }
+    })} />
+  </Fragment>
+  <Navbar />
+  <main class="w-full flex flex-col pt-32 pb-0 min-h-screen relative bg-brand-dark overflow-hidden">
+      
+      <!-- Structural Grid Background -->
+      <div class="absolute inset-x-0 top-0 h-screen z-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,#111_0%,transparent_70%)]"></div>
+
+      <!-- Case Study Hero (Cinematic) -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pb-12 pt-12 flex flex-col gap-8">
+          <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+              <div class="flex flex-col max-w-4xl overflow-hidden md:overflow-visible">
+                  <div class="inline-flex flex-wrap items-start md:items-center gap-3 px-4 py-1.5 border border-brand-primary/40 bg-brand-primary/5 text-brand-primary text-xs font-mono uppercase tracking-[0.2em] mb-6 shadow-[0_0_10px_rgba(56,182,255,0.1)] w-fit text-left">
+                      <span class="w-1.5 h-1.5 rounded-none bg-brand-primary animate-pulse shrink-0 mt-1.5 md:mt-0"></span> <span class="break-words">DEPLOYMENT: {entry.data.clientType}</span>
+                  </div>
+                  <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-8 break-words hyphens-auto">
+                      {entry.data.title}
+                  </h1>
+                  <p class="text-brand-light/60 text-lg md:text-xl max-w-xl font-light">
+                      {entry.data.description}
+                  </p>
+              </div>
+          </div>
+          
+          <!-- Cinematic Primary Image Slider -->
+          <div class="relative w-full aspect-[21/9] md:aspect-video border border-white/10 bg-[#020202] overflow-hidden group/hero shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-4">
+              <div class="absolute inset-0 bg-brand-primary/10 mix-blend-overlay z-10 opacity-0 group-hover/hero:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+              
+              <div id="hero-slider" class="w-full h-full flex overflow-x-auto snap-x snap-mandatory" style="scrollbar-width: none; -ms-overflow-style: none;">
+                <style>
+                  #hero-slider::-webkit-scrollbar { display: none; }
+                </style>
+                {(entry.data.gallery && entry.data.gallery.length > 0) ? entry.data.gallery.map((img: string) => (
+                   <img src={img} alt={entry.data.title} class="snap-center shrink-0 w-full h-full object-cover group-hover/hero:brightness-110 transition-all duration-700 scale-100" />
+                )) : (
+                   <img src={entry.data.image} alt={entry.data.title} class="snap-center shrink-0 w-full h-full object-cover group-hover/hero:brightness-110 transition-all duration-700 scale-100" />
+                )}
+              </div>
+              
+              {(entry.data.gallery && entry.data.gallery.length > 1) && (
+                <>
+                <div class="absolute inset-y-0 left-0 flex items-center z-30 px-3 md:px-6">
+                   <button id="hero-prev" aria-label="Previous Slide" class="w-10 h-10 md:w-12 md:h-12 bg-black/50 border border-white/20 text-white flex items-center justify-center hover:bg-brand-primary hover:text-black hover:border-brand-primary transition-all backdrop-blur-sm cursor-pointer shadow-lg outline-none">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                   </button>
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center z-30 px-3 md:px-6">
+                   <button id="hero-next" aria-label="Next Slide" class="w-10 h-10 md:w-12 md:h-12 bg-black/50 border border-white/20 text-white flex items-center justify-center hover:bg-brand-primary hover:text-black hover:border-brand-primary transition-all backdrop-blur-sm cursor-pointer shadow-lg outline-none">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                   </button>
+                </div>
+                </>
+              )}
+              
+              <!-- Camera UI Overlay -->
+              <div class="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-white/30 z-20 pointer-events-none"></div>
+              <div class="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-white/30 z-20 pointer-events-none"></div>
+              <div class="absolute bottom-6 left-6 font-mono text-xs text-brand-light/60 tracking-widest z-20 pointer-events-none">
+                  REC: {entry.id.toUpperCase()}
+              </div>
+          </div>
+      </div>
+
+      <!-- Performance Metrics Ribbon -->
+      <div class="relative z-20 bg-[#020202] border-y border-brand-mid w-full sticky top-[72px] shadow-[0_10px_30px_rgba(0,0,0,0.9)] hidden md:block">
+          <div class="max-w-7xl mx-auto w-full px-6 lg:px-8">
+              <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                  <div class="py-6 md:py-8 pr-8 flex flex-col group cursor-default">
+                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> PERFORMANCE METRIC</span>
+                     <span class="font-black text-3xl md:text-4xl text-white truncate">{entry.data.metric1}</span>
+                  </div>
+                  <div class="py-6 md:py-8 px-0 md:px-8 flex flex-col group cursor-default">
+                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> TIME HORIZON</span>
+                     <span class="font-black text-3xl md:text-4xl text-white truncate">{entry.data.metric2}</span>
+                  </div>
+                  <div class="py-6 md:py-8 pl-0 md:pl-8 flex flex-col group cursor-default">
+                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> OUTPUT YIELD</span>
+                     <span class="font-black text-3xl md:text-4xl text-white truncate">{entry.data.metric3}</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Mobile Static Metrics (non-sticky) -->
+      <div class="relative z-10 bg-[#020202] border-y border-brand-mid w-full md:hidden">
+         <div class="px-6 grid grid-cols-1 divide-y divide-white/10">
+            <div class="py-6 flex flex-col">
+               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> PERFORMANCE METRIC</span>
+               <span class="font-black text-3xl text-white truncate">{entry.data.metric1}</span>
+            </div>
+            <div class="py-6 flex flex-col">
+               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> TIME HORIZON</span>
+               <span class="font-black text-3xl text-white truncate">{entry.data.metric2}</span>
+            </div>
+            <div class="py-6 flex flex-col">
+               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> OUTPUT YIELD</span>
+               <span class="font-black text-3xl text-white truncate">{entry.data.metric3}</span>
+            </div>
+         </div>
+      </div>
+
+      <!-- Execution Log & Metadata -->
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full py-16 lg:py-24 z-10 relative flex flex-col lg:flex-row gap-16 lg:gap-24">
+          
+          <!-- Left Column: Sticky Metadata -->
+          <aside class="w-full lg:w-1/4 flex flex-col gap-10 lg:order-1 order-2">
+              <div class="lg:sticky lg:top-[200px]">
+                  <h3 class="font-black text-white text-xl uppercase tracking-wide border-b border-brand-primary/20 pb-4 mb-6">Taxonomy</h3>
+                  
+                  <div class="flex flex-col gap-6 font-mono text-sm">
+                      <div>
+                          <span class="block text-brand-primary/60 text-[10px] tracking-widest uppercase mb-1">CLIENT TYPE</span>
+                          <span class="text-white/80">{entry.data.clientType}</span>
+                      </div>
+                      <div>
+                          <span class="block text-brand-primary/60 text-[10px] tracking-widest uppercase mb-1">SERVICES DEPLOYED</span>
+                          <ul class="flex flex-col gap-2 mt-2 text-white/80">
+                              {entry.data.services.map((service: string) => (
+                                  <li class="flex items-center gap-2">
+                                      <span class="w-1 h-1 bg-brand-primary"></span>
+                                      {service.replace(/-/g, ' ').toUpperCase()}
+                                  </li>
+                              ))}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </aside>
+
+          <!-- Right Column: Markdown Prose -->
+          <article class="w-full lg:w-3/4 lg:order-2 order-1">
+              <h2 class="font-black text-3xl md:text-5xl text-brand-primary uppercase mb-12">Execution Log.</h2>
+              <div class="prose prose-invert max-w-none
+                  prose-headings:font-black prose-headings:text-white prose-headings:uppercase prose-headings:tracking-wide
+                  prose-h2:text-3xl lg:prose-h2:text-4xl prose-h2:mt-12 lg:prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b prose-h2:border-white/10 prose-h2:pb-4
+                  prose-p:text-brand-light/70 prose-p:leading-[1.8] prose-p:text-sm md:prose-p:text-[18px]
+                  prose-a:text-brand-primary prose-a:no-underline hover:prose-a:border-b hover:prose-a:border-brand-primary
+                  prose-strong:text-white prose-strong:font-bold">
+                  <Content />
+              </div>
+          </article>
+      </div>
+
+      <!-- Project Gallery removed per user request -->
+      
+      <!-- Related Deployments -->
+      <section class="max-w-7xl mx-auto px-6 lg:px-8 w-full py-24 z-10 relative mt-12 lg:mt-0">
+          <div class="mb-12 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 w-full">
+              <div class="w-full md:w-auto">
+                  <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// MORE DEPLOYMENTS</p>
+                  <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4 text-white uppercase">Additional <br class="hidden lg:block"/> Projects.</h2>
+                  <p class="text-brand-light/60 text-base md:text-lg max-w-xl">
+                      Review other case studies where we've built high-converting digital systems for local service businesses.
+                  </p>
+              </div>
+              <a href="/work" class="font-mono text-brand-light hover:text-brand-primary text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-colors border border-white/20 px-6 py-4 hover:bg-brand-primary/10 hover:border-brand-primary w-full md:w-auto mt-2 md:mt-0">
+                  [ VIEW ALL CASE STUDIES ]
+              </a>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+              {relatedProjects.map(project => (
+                  <a href={`/work/${project.id.replace('.md','')}`} class="group relative bg-brand-dark hover:bg-brand-mid/50 border border-white/10 transition-all duration-500 overflow-hidden block hover:border-brand-primary/50">
+                      <div class="aspect-[16/10] overflow-hidden relative border-b border-white/10">
+                          <div class="absolute inset-0 bg-brand-dark/40 mix-blend-multiply group-hover:bg-transparent transition-all duration-500 z-10"></div>
+                          <img 
+                              src={project.data.image} 
+                              alt={project.data.title} 
+                              class="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-[1s]" 
+                          />
+                      </div>
+                      
+                      <div class="p-8 flex justify-between items-start bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:1rem_1rem]">
+                          <div>
+                              <p class="font-mono text-brand-primary/60 tracking-widest text-xs mb-2 uppercase group-hover:text-brand-primary transition-colors">{project.data.clientType}</p>
+                              <h3 class="text-2xl font-bold text-white uppercase">{project.data.title}</h3>
+                          </div>
+                          <div class="font-mono text-xs text-brand-primary px-3 py-1 border border-brand-primary/20 bg-brand-primary/5 mt-1 hidden sm:block">ACTIVE</div>
+                      </div>
+                  </a>
+              ))}
+          </div>
+      </section>
+
+      <!-- Inverted CTA (Cross-linked Design) -->
+      <section class="relative w-full z-20 text-center bg-brand-primary border-t border-brand-mid">
+          <div class="max-w-5xl mx-auto px-6 lg:px-8 w-full py-16 md:py-24">
+              <p class="font-mono text-brand-dark/60 tracking-[0.2em] text-sm mb-6 uppercase font-bold">/// NEXT STEPS</p>
+              <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-10 uppercase tracking-tight">Start your project.</h2>
+              <a href="/contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-white text-white hover:text-brand-dark px-8 md:px-10 py-5 font-bold font-mono tracking-widest text-sm shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 uppercase relative group z-30 w-full md:w-auto">
+                  [ BOOK A CALL ]
+              </a>
+          </div>
+      </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const setupGallery = () => {
+    const heroSlider = document.getElementById('hero-slider');
+    const heroPrevBtn = document.getElementById('hero-prev');
+    const heroNextBtn = document.getElementById('hero-next');
+    
+    if(heroSlider && heroPrevBtn && heroNextBtn) {
+      heroPrevBtn.addEventListener('click', () => {
+        heroSlider.scrollBy({ left: -heroSlider.clientWidth, behavior: 'smooth' });
+      });
+      heroNextBtn.addEventListener('click', () => {
+        heroSlider.scrollBy({ left: heroSlider.clientWidth, behavior: 'smooth' });
+      });
+    }
+  };
+
+  setupGallery();
+  document.addEventListener('astro:page-load', setupGallery);
+</script>

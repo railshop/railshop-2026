@@ -1,0 +1,74 @@
+---
+const services = [
+  {
+    title: "High-Converting Websites",
+    description: "Fast, professional websites built to turn casual visitors into booked jobs and keep your schedule full.",
+    href: "/services/web-design"
+  },
+  {
+    title: "Targeted Paid Advertising",
+    description: "Data-driven advertising campaigns built to monopolize local search and acquire exclusive leads efficiently.",
+    href: "/services/paid-ads"
+  },
+  {
+    title: "Search Engine Optimization",
+    description: "Scale your company to the top of organic search rankings using technically optimized site architecture.",
+    href: "/services/seo"
+  },
+  {
+    title: "Content Creation",
+    description: "Professional photography and video production that builds trust and showcases the real quality of your work.",
+    href: "/services/content-creation"
+  },
+  {
+    title: "Digital Strategy Consulting",
+    description: "Expert marketing audits that cut through the noise. We analyze your footprint and map out a path to scale.",
+    href: "/services/digital-strategy-consulting"
+  },
+  {
+    title: "AI Integration",
+    description: "Practical AI tools seamlessly integrated into your workflow to streamline marketing and close more sales.",
+    href: "/services/ai-integration"
+  }
+];
+---
+
+<section id="services" class="py-24 bg-brand-dark overflow-hidden relative border-b border-brand-mid">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="mb-12 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 z-20 relative w-full">
+            <div class="w-full md:w-auto">
+                <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// CORE SERVICES</p>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4 uppercase">The Growth Engine.</h2>
+                <p class="text-brand-light/60 text-base md:text-lg max-w-xl">
+                    We combine technical precision with data-driven marketing strategies built specifically to scale service businesses.
+                </p>
+            </div>
+            <a href="/services" class="font-mono text-brand-light hover:text-brand-primary text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-colors border border-white/20 px-6 py-4 hover:bg-brand-primary/10 hover:border-brand-primary shrink-0 w-full md:w-auto text-center mt-2 md:mt-0">
+                [ VIEW ALL SERVICES ]
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-white/10 relative shadow-2xl">
+            {services.map((service, i) => (
+                <a href={service.href} class="block bg-brand-dark hover:bg-brand-mid/70 border-r border-b border-white/10 p-8 md:p-10 group transition-all duration-300 relative">
+                    <div class="absolute top-6 right-6 font-mono text-brand-primary/40 text-xs tracking-widest group-hover:text-brand-primary transition-colors">
+                      SVC-0{i + 1}
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-brand-light group-hover:text-brand-primary transition-colors">
+                        {service.title}
+                    </h3>
+                    <p class="text-brand-light/60 leading-relaxed font-light text-[17px]">
+                        {service.description}
+                    </p>
+                    
+                    {/* Crosshairs on hover */}
+                    <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </a>
+            ))}
+        </div>
+    </div>
+</section>

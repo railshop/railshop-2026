@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import AboutSnippet from '../components/AboutSnippet.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import Projects from '../components/Projects.astro';
+import BlogFeed from '../components/BlogFeed.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Railshop | Digital Growth Partner for Home Services" description="We build high-performance websites and automated lead generation engines exclusively for local home service contractors.">
+	<Navbar />
+	<main class="w-full flex flex-col pt-16 md:pt-20">
+		<Hero />
+		<AboutSnippet />
+		<Services />
+		<Projects />
+		<Process />
+		<BlogFeed />
+        
+        {/* GLOBAL CTA ENDCAP */}
+        <section class="relative w-full z-20 text-center bg-brand-primary">
+            <div class="max-w-5xl mx-auto px-6 lg:px-8 w-full py-16 md:py-24">
+                <p class="font-mono text-brand-dark/60 tracking-[0.2em] text-sm mb-6 uppercase font-bold">/// NEXT STEPS</p>
+                <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-10 uppercase tracking-tight">Start your project.</h2>
+                <a href="/contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-white text-white hover:text-brand-dark px-8 md:px-10 py-5 font-bold font-mono tracking-widest text-sm shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 uppercase relative group z-30 w-full md:w-auto">
+                    [ BOOK A CALL ]
+                </a>
+            </div>
+        </section>
+	</main>
+	<Footer />
+</Layout>

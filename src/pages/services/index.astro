@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const rawServices = await getCollection('services');
+const sortOrder = ['web-design', 'paid-ads', 'seo', 'content-creation', 'digital-strategy-consulting', 'ai-integration'];
+
+const services = rawServices.sort((a, b) => {
+    const aId = a.id.replace('.md', '');
+    const bId = b.id.replace('.md', '');
+    return sortOrder.indexOf(aId) - sortOrder.indexOf(bId);
+});
+---
+
+<Layout title="Core Services | Digital Growth Engineering" description="Performance-driven growth engineering. We deploy high-voltage web design, SEO, and paid ads specifically targeted for contractors.">
+  <Navbar />
+  
+  <main class="w-full flex flex-col min-h-screen relative bg-brand-dark overflow-hidden">
+    
+    <!-- Structural Grid Background -->
+    <div class="absolute inset-x-0 top-0 h-screen z-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,#111_0%,transparent_70%)]"></div>
+
+    <!-- Services Muted Background -->
+    <div class="absolute inset-x-0 top-0 h-[600px] lg:h-[700px] z-0 pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/20 via-brand-dark/80 to-brand-dark z-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-transparent to-brand-dark z-10"></div>
+        <img src="/images/hero/services-hero.webp" alt="Railshop Services" class="w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity duration-1000 animate-fade-in" />
+    </div>
+
+    {/* Asymmetrical Directory Header with Jump Stack */}
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-48 lg:pb-24 flex flex-col lg:flex-row items-center justify-between gap-12 border-b border-white/5 mb-16 lg:mb-24">
+        
+        {/* Left Column: Typography */}
+        <div class="w-full lg:w-5/12 flex flex-col items-start text-left">
+            <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// WHAT WE DO</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-8">
+                Our <br class="hidden lg:block"/> Services.
+            </h1>
+            <p class="text-brand-light/60 text-lg md:text-xl max-w-xl font-light">
+                Performance-driven growth engineering for local home services. We don't build sites; we build pipelines.
+            </p>
+        </div>
+
+        {/* Right Column: The Functional "Jump Stack" Navigation (Hidden on Mobile) */}
+        <div class="hidden lg:flex w-full lg:w-4/12 flex-col justify-end lg:items-end gap-4 font-mono text-xs md:text-sm tracking-widest uppercase mt-8 lg:mt-0">
+            <p class="text-brand-primary/40 mb-2 border-b border-brand-primary/20 pb-4 w-full lg:text-right">[ QUICK LINKS ]</p>
+            
+            <a href="/services/web-design" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                Web Design
+            </a>
+            <a href="/services/paid-ads" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                Paid Ads
+            </a>
+            <a href="/services/seo" class="text-white hover:text-brand-primary transition-colors flex items-center justify-start lg:justify-end gap-3 group">
+                <span class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-primary">→</span> 
+                SEO
+            </a>
+            <a href="/contact" class="text-brand-primary hover:text-white transition-colors flex items-center justify-start lg:justify-end gap-3 group mt-6 pt-4 border-t border-white/5 w-full">
+                <span class="w-1.5 h-1.5 bg-brand-primary group-hover:bg-white transition-colors"></span> 
+                START A PROJECT
+            </a>
+        </div>
+    </div>
+
+    {/* The Asymmetrical Sticky Stack */}
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative pb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 relative items-start">
+            
+            {/* Sticky Left Column: Philosophy */}
+            <div class="lg:col-span-4 lg:sticky lg:top-32 relative z-20">
+                <div class="border-l-2 border-brand-primary/30 pl-6 py-2">
+                    <h3 class="text-2xl font-black text-white uppercase mb-4">Our Approach</h3>
+                    <p class="text-brand-light/60 text-sm md:text-base mb-6">
+                        Every service we deploy runs through a strict, data-driven framework. We focus exclusively on what generates measurable ROI for your dispatch board.
+                    </p>
+                    <ul class="space-y-3 font-mono text-xs tracking-widest text-brand-light/40 uppercase">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand-primary"></span> Technical Precision</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand-primary"></span> Local Domination</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-brand-primary"></span> Revenue Focused</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Scrolling Right Column: The 6 Services */}
+            <div class="lg:col-span-8 flex flex-col gap-12 lg:gap-16">
+                {services.map((service, index) => (
+                    <div class="group relative bg-[#030303] border border-white/5 p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-brand-primary/30 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                        {/* Massive Watermark from Markdown field */}
+                        <div class="absolute -right-4 -bottom-8 text-[120px] md:text-[180px] font-black text-white/[0.02] tracking-tighter leading-none pointer-events-none uppercase rotate-[-2deg] group-hover:text-brand-primary/[0.05] transition-colors duration-500 select-none">
+                            {service.data.systemCode || `0${index + 1}`}
+                        </div>
+
+                        {/* Content */}
+                        <div class="relative z-10 w-full">
+                            <h2 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">
+                                {service.data.title}
+                            </h2>
+                            <p class="text-brand-light/60 text-base md:text-lg max-w-xl mb-10">
+                                {service.data.description}
+                            </p>
+                            
+                            <a href={`/services/${service.id}`} class="inline-flex items-center gap-3 font-mono text-brand-primary text-xs tracking-widest uppercase hover:text-white transition-colors group/link mt-auto inline-block border-b border-brand-primary/30 pb-1">
+                                [ EXPLORE SERVICE ]
+                                <svg class="w-4 h-4 translate-x-0 group-hover/link:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+        </div>
+    </div>
+    
+    {/* Global Endcap Call to Action */}
+    <section class="relative w-full z-20 text-center bg-brand-primary border-t border-brand-mid">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8 w-full py-16 md:py-24">
+            <p class="font-mono text-brand-dark/60 tracking-[0.2em] text-sm mb-6 uppercase font-bold">/// NEXT STEPS</p>
+            <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-10 uppercase tracking-tight">Start your project.</h2>
+            <a href="/contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-white text-white hover:text-brand-dark px-8 md:px-10 py-5 font-bold font-mono tracking-widest text-sm shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 uppercase relative group z-30 w-full md:w-auto">
+                [ BOOK A CALL ]
+            </a>
+        </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+</Layout>

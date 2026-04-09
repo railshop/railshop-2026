@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand-primary: #38b6ff;
+  --color-brand-dark: #050505;
+  --color-brand-mid: #111111;
+  --color-brand-light: #e2e8f0;
+  --font-sans: "Outfit Variable", system-ui, sans-serif;
+}
+
+@layer components {
+  .prose ul, .prose ol {
+    @apply text-[18px] text-brand-light/70 leading-[1.8] space-y-3 pl-6;
+  }
+  .prose ul {
+    list-style-type: square;
+  }
+  .prose ol {
+    @apply list-decimal;
+  }
+  .prose li::marker {
+    @apply text-brand-primary font-bold;
+  }
+}
+
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-radar {
+    animation: radar-sweep 20s linear infinite;
+  }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes radar-sweep {
+  0% { background-position: 0 0; }
+  100% { background-position: 4rem 4rem; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #1a1e23 #111315;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111315;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1a1e23;
+  border-radius: 10px;
+}

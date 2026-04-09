@@ -1,0 +1,42 @@
+---
+const categories = [
+    { label: "View All", slug: "/blog" },
+    { label: "Web Design", slug: "/blog/category/web-design" },
+    { label: "Paid Ads", slug: "/blog/category/paid-ads" },
+    { label: "SEO", slug: "/blog/category/seo" },
+    { label: "Content Creation", slug: "/blog/category/content-creation" },
+    { label: "Digital Strategy", slug: "/blog/category/digital-strategy" },
+    { label: "AI Integration", slug: "/blog/category/ai-integration" },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, ""); 
+---
+
+<div class="w-full flex flex-wrap items-center gap-2 mb-12">
+    {categories.map(cat => {
+        let isActive = false;
+        if (cat.slug === "/blog") {
+            // View All is active if the path starts with /blog but does NOT contain /category
+            isActive = currentPath.startsWith("/blog") && !currentPath.includes("/category");
+            
+            // Critical fail-safe if on root homepage (which won't happen here but good practice)
+            if (currentPath === "") isActive = false; 
+        } else {
+            // Category toggle is active if path starts with that specific category string
+            isActive = currentPath.startsWith(cat.slug);
+        }
+
+        return (
+            <a 
+                href={cat.slug}
+                class={`font-mono text-xs tracking-widest uppercase transition-all px-4 py-2.5 border ${
+                    isActive 
+                    ? 'border-brand-primary bg-brand-primary/10 text-brand-primary font-black shadow-[inset_0_0_10px_rgba(56,182,255,0.2)]' 
+                    : 'border-white/10 text-brand-light/60 hover:border-brand-primary/50 hover:text-white hover:bg-white/5'
+                }`}
+            >
+                {cat.label}
+            </a>
+        )
+    })}
+</div>
