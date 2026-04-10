@@ -63,7 +63,7 @@ const readTime = Math.max(1, Math.ceil(wordCount / 200));
               {entry.data.title}
           </h1>
           
-          <div class="flex flex-wrap items-center gap-4 font-mono text-xs text-brand-light/40 uppercase tracking-widest pb-12">
+          <div class="flex flex-wrap items-center gap-4 font-mono text-xs text-brand-light/40 uppercase tracking-widest pb-6 md:pb-12">
               <span>{entry.data.date.toString().substring(0, 15)}</span>
               <span class="text-brand-primary hidden sm:inline-block">///</span>
               <span class="text-brand-light/80 border-b border-white/20 pb-0.5">AUTHOR: {entry.data.author || 'SYSTEM'}</span>
@@ -81,7 +81,7 @@ const readTime = Math.max(1, Math.ceil(wordCount / 200));
               prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
               prose-code:font-mono prose-code:text-brand-primary prose-code:bg-brand-primary/10 prose-code:px-2 prose-code:py-1
               prose-strong:text-white prose-strong:font-bold prose-strong:bg-white/5 prose-strong:px-1
-              pb-20">
+              pb-8 md:pb-16">
               <Content />
           </article>
       </div>
@@ -92,27 +92,27 @@ const readTime = Math.max(1, Math.ceil(wordCount / 200));
               <p class="font-mono text-brand-primary/40 tracking-[0.2em] text-xs mb-6 uppercase">/// ABOUT THE AUTHOR</p>
               
               <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 bg-[#050505] border border-white/10 p-6 md:p-8">
-                  <!-- Avatar Placeholder -->
+                  <!-- Avatar -->
                   <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 bg-brand-dark shrink-0 flex items-center justify-center overflow-hidden relative group">
-                      <div class="absolute inset-0 bg-brand-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                      <span class="font-mono font-black text-white/20 text-2xl tracking-widest">{entry.data.author?.substring(0,1) || "X"}</span>
+                      <div class="absolute inset-0 bg-brand-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                      <img src="/images/about/drew.jpg" alt={entry.data.author || "Drew O."} class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500" />
                   </div>
                   
                   <div class="w-full flex-grow">
                       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 w-full mb-3">
                           <div>
-                              <h4 class="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{entry.data.author || 'Systems Engineer'}</h4>
-                              <p class="font-mono text-brand-primary text-xs tracking-widest uppercase">Lead Strategist & Founder</p>
+                              <h4 class="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{entry.data.author || 'Drew O.'}</h4>
+                              <p class="font-mono text-brand-primary text-xs tracking-widest uppercase">CO-FOUNDER, HEAD OF DIGITAL STRATEGY</p>
                           </div>
                           
-                          <a href="https://linkedin.com" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-brand-light/60 hover:text-white transition-colors group">
+                          <a href="https://www.linkedin.com/in/andrewopalinski/" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-brand-light/60 hover:text-brand-primary transition-colors group">
                               CONNECT ON LINKEDIN 
                               <span class="text-brand-primary group-hover:translate-x-1 transition-transform">&rarr;</span>
                           </a>
                       </div>
                       <div class="w-full h-px bg-white/5 mb-5"></div>
-                      <p class="text-brand-light/50 text-sm md:text-base leading-relaxed">
-                          Building high-performance digital infrastructure for local service companies. We focus strictly on deploying conversion architecture that scales dispatch flow and drives raw revenue.
+                      <p class="text-brand-light/50 text-[15px] md:text-base leading-relaxed">
+                          Architecting comprehensive digital growth strategies, optimizing ad deployments, and directing ongoing client operations to guarantee maximum ROI for every home service partner.
                       </p>
                   </div>
               </div>
