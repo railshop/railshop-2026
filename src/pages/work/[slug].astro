@@ -110,15 +110,15 @@ const relatedProjects = allProjects.filter(p => p.id !== entry.id).slice(0, 2);
           <div class="max-w-7xl mx-auto w-full px-6 lg:px-8">
               <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
                   <div class="py-6 md:py-8 pr-8 flex flex-col group cursor-default">
-                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> PERFORMANCE METRIC</span>
+                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> {entry.data.metric1Label}</span>
                      <span class="font-black text-3xl md:text-4xl text-white truncate">{entry.data.metric1}</span>
                   </div>
                   <div class="py-6 md:py-8 px-0 md:px-8 flex flex-col group cursor-default">
-                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> TIME HORIZON</span>
+                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> {entry.data.metric2Label}</span>
                      <span class="font-black text-3xl md:text-4xl text-white truncate">{entry.data.metric2}</span>
                   </div>
                   <div class="py-6 md:py-8 pl-0 md:pl-8 flex flex-col group cursor-default">
-                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> OUTPUT YIELD</span>
+                     <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2 group-hover:text-brand-primary transition-colors">>> {entry.data.metric3Label}</span>
                      <span class="font-black text-3xl md:text-4xl text-white truncate">{entry.data.metric3}</span>
                   </div>
               </div>
@@ -129,15 +129,15 @@ const relatedProjects = allProjects.filter(p => p.id !== entry.id).slice(0, 2);
       <div class="relative z-10 bg-[#020202] border-y border-brand-mid w-full md:hidden">
          <div class="px-6 grid grid-cols-1 divide-y divide-white/10">
             <div class="py-6 flex flex-col">
-               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> PERFORMANCE METRIC</span>
+               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> {entry.data.metric1Label}</span>
                <span class="font-black text-3xl text-white truncate">{entry.data.metric1}</span>
             </div>
             <div class="py-6 flex flex-col">
-               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> TIME HORIZON</span>
+               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> {entry.data.metric2Label}</span>
                <span class="font-black text-3xl text-white truncate">{entry.data.metric2}</span>
             </div>
             <div class="py-6 flex flex-col">
-               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> OUTPUT YIELD</span>
+               <span class="text-brand-light/40 text-[10px] font-mono tracking-widest uppercase mb-2">>> {entry.data.metric3Label}</span>
                <span class="font-black text-3xl text-white truncate">{entry.data.metric3}</span>
             </div>
          </div>

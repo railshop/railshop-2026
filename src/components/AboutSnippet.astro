@@ -1,39 +1,60 @@
 ---
 ---
-<section class="py-24 border-b border-brand-mid bg-brand-dark relative z-10 w-full overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
-            <div class="lg:col-span-5 relative group">
-                <div class="absolute -inset-1 bg-brand-primary opacity-20 group-hover:opacity-40 blur transition duration-500"></div>
-                <div class="relative bg-[#020202] border border-brand-primary/50 p-8 h-full flex flex-col justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-                    <p class="font-mono text-brand-primary tracking-[0.2em] text-xs mb-6 uppercase">/// ABOUT RAILSHOP</p>
-                    <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase text-white leading-[1.05] mb-8">
-                        We Build <br/> Growth.
-                    </h2>
-                    <ul class="font-mono text-sm text-brand-light/60 space-y-4 mb-4">
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-primary block animate-pulse"></span> SYSTEM: ONLINE</li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 border border-brand-primary block"></span> FOCUS: SERVICE DOMINATION</li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 border border-brand-primary block"></span> TYPE: GROWTH PARTNER</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="lg:col-span-7 lg:pl-16">
-                <p class="text-2xl text-white mb-6 leading-tight font-black uppercase tracking-wide">
-                    Architected for revenue.
-                </p>
-                <p class="text-lg md:text-xl text-brand-light/60 mb-10 leading-relaxed font-light">
-                    We act as your digital infrastructure team. Through high-performance web design, precision SEO, and targeted ads, we build automated pipelines that dominate local markets.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-6 items-center">
-                    <a href="/about" class="inline-flex justify-center w-full sm:w-auto items-center gap-3 bg-transparent border border-brand-primary/50 hover:bg-brand-primary/10 text-brand-primary px-8 py-4 font-bold font-mono tracking-widest text-sm transition-all uppercase group">
-                        [ LEARN MORE ABOUT US ]
-                    </a>
-                </div>
-            </div>
-            
+<section class="py-24 md:py-32 border-b border-brand-mid bg-brand-dark relative z-10 w-full overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 relative z-20">
+        
+        {/* --- HEADER: Mission Control Panel --- */}
+        <div class="flex flex-col items-center text-center mb-10 md:mb-12">
+            <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// ABOUT RAILSHOP</p>
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight uppercase text-white leading-[1.05]">
+                Launch With <br /> Confidence.
+            </h2>
         </div>
+
+        {/* --- VIDEO CORE: The Chassis --- */}
+        <div class="relative group mb-16 md:mb-20 max-w-5xl mx-auto w-full">
+            {/* Ambient System Glow */}
+            <div class="absolute -inset-1 md:-inset-2 bg-brand-primary opacity-10 group-hover:opacity-20 blur-xl transition duration-700 pointer-events-none"></div>
+            
+            {/* Hard Terminal Boundary */}
+            <div class="relative bg-brand-dark border border-brand-primary/40 shadow-[0_10px_30px_rgba(0,0,0,0.6)] z-10 w-full overflow-hidden border-t-2 border-t-brand-primary">
+                
+                {/* Tactical Window Bar */}
+                <div class="px-4 py-2 border-b border-brand-primary/20 bg-brand-primary/[0.03] flex items-center justify-between">
+                    <p class="font-mono text-brand-primary/70 tracking-[0.2em] text-[10px] uppercase">/// SYSTEM_FEED_LINK_ACTIVE</p>
+                    <div class="flex gap-2">
+                        <span class="w-2 h-2 bg-brand-primary/30"></span>
+                        <span class="w-2 h-2 bg-brand-primary/50"></span>
+                        <span class="w-2 h-2 bg-brand-primary translate-y-[1px]"></span>
+                    </div>
+                </div>
+
+                {/* Secure Responsive Video Container - Exactly 16:9 scale mapping */}
+                <div class="relative w-full aspect-video bg-[#050505] flex items-center justify-center">
+                    <iframe 
+                        src="https://player.vimeo.com/video/816698119?title=0&byline=0&portrait=0" 
+                        class="absolute top-0 left-0 w-full h-full"
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen
+                        title="We Build Growth - Railshop Introduction"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+
+        {/* --- PROSE CONTEXT & RESPONSE DECK --- */}
+        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+            <p class="text-2xl md:text-3xl text-white mb-6 font-black uppercase tracking-wide">
+                Architected for revenue.
+            </p>
+            <p class="text-lg md:text-xl text-brand-light/60 mb-10 leading-relaxed font-light text-balance">
+                We act as your digital infrastructure team. Through high-performance web design, precision SEO, and targeted ads, we build automated pipelines that dominate local markets.
+            </p>
+            <a href="/about" class="inline-flex justify-center items-center gap-3 bg-transparent border border-brand-primary hover:bg-brand-primary/10 text-brand-primary px-8 py-4 md:py-5 font-bold font-mono tracking-widest text-xs md:text-sm transition-all uppercase group shadow-[0_0_15px_rgba(56,182,255,0.1)] hover:shadow-[0_0_25px_rgba(56,182,255,0.25)]">
+                [ LEARN MORE ABOUT US ]
+            </a>
+        </div>
+
     </div>
 </section>
