@@ -78,22 +78,37 @@ const links = [
     <div id="mobile-menu-pane" class="md:hidden absolute top-[95%] left-4 right-4 bg-[#020202] border border-white/10 border-t-0 shadow-[0_20px_50px_rgba(0,0,0,0.9)] opacity-0 invisible translate-y-[-10px] transition-all duration-300 z-40 pointer-events-auto flex flex-col pt-4 pb-6">
         <div class="w-full h-1 bg-brand-primary top-0 left-0 absolute z-20"></div>
         <ul class="flex flex-col w-full text-left relative z-20">
-            {links.map(link => (
+            {links.map((link, index) => (
                 <li class="w-full">
-                    <a href={link.href} class="block px-8 py-5 font-mono text-sm tracking-widest text-white hover:text-brand-primary transition-colors uppercase border-b border-white/5 last:border-0">
-                        <span class="text-brand-primary opacity-50 mr-2">></span> {link.name}
-                    </a>
-                    {/* Render Sublinks inside mobile accordian naturally */}
+                    {link.sublinks ? (
+                        <button class="w-full flex items-center justify-between px-8 py-5 font-mono text-sm tracking-widest text-white hover:text-brand-primary transition-colors uppercase border-b border-white/5 last:border-0 mobile-accordion-btn text-left" data-target={`mobile-accordion-${index}`}>
+                            <span><span class="text-brand-primary opacity-50 mr-2">></span> {link.name}</span>
+                            <span class="text-brand-primary opacity-80 text-[10px] accordion-icon">[ + ]</span>
+                        </button>
+                    ) : (
+                        <a href={link.href} class="block px-8 py-5 font-mono text-sm tracking-widest text-white hover:text-brand-primary transition-colors uppercase border-b border-white/5 last:border-0">
+                            <span class="text-brand-primary opacity-50 mr-2">></span> {link.name}
+                        </a>
+                    )}
+                    
+                    {/* Render Sublinks inside mobile accordian hidden by default */}
                     {link.sublinks && (
-                        <ul class="flex flex-col w-full bg-white/[0.02]">
-                            {link.sublinks.map(sublink => (
+                        <div id={`mobile-accordion-${index}`} class="hidden flex-col w-full bg-white/[0.02]">
+                            <ul class="flex flex-col w-full">
                                 <li>
-                                    <a href={sublink.href} class="block px-8 py-4 pl-14 font-mono text-xs tracking-widest text-brand-light/60 hover:text-brand-primary transition-colors uppercase border-b border-white/5 last:border-0">
-                                        - {sublink.name}
+                                    <a href={link.href} class="block px-8 py-4 pl-14 font-mono text-xs tracking-widest text-brand-primary hover:text-white transition-colors uppercase border-b border-white/5 last:border-0 font-bold">
+                                        - View All {link.name}
                                     </a>
                                 </li>
-                            ))}
-                        </ul>
+                                {link.sublinks.map(sublink => (
+                                    <li>
+                                        <a href={sublink.href} class="block px-8 py-4 pl-14 font-mono text-xs tracking-widest text-brand-light/60 hover:text-brand-primary transition-colors uppercase border-b border-white/5 last:border-0">
+                                            - {sublink.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     )}
                 </li>
             ))}
@@ -141,5 +156,28 @@ const links = [
                 }
             });
         }
+
+        // Accordion Engine for Mobile Nav
+        const accordionBtns = document.querySelectorAll('.mobile-accordion-btn');
+        accordionBtns.forEach(accBtn => {
+            accBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = accBtn.getAttribute('data-target');
+                const targetEl = document.getElementById(targetId);
+                const icon = accBtn.querySelector('.accordion-icon');
+                
+                if (targetEl && icon) {
+                    if (targetEl.classList.contains('hidden')) {
+                        targetEl.classList.remove('hidden');
+                        targetEl.classList.add('flex');
+                        icon.textContent = '[ - ]';
+                    } else {
+                        targetEl.classList.add('hidden');
+                        targetEl.classList.remove('flex');
+                        icon.textContent = '[ + ]';
+                    }
+                }
+            });
+        });
     });
 </script>

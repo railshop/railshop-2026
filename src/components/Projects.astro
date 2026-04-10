@@ -24,12 +24,12 @@ if (filterTag) {
             <div class="w-full md:w-auto">
                 <p class="font-mono text-brand-primary tracking-[0.2em] text-sm mb-4 uppercase">/// RECENT WORK</p>
                 <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4 uppercase">{headline}</h2>
-                <p class="text-brand-light/60 text-base md:text-lg max-w-xl">
+                <p class="hidden md:block text-brand-light/60 text-base md:text-lg max-w-xl">
                     {subhead}
                 </p>
             </div>
             {limit !== false && (
-                <a href="/work" class="font-mono text-brand-light hover:text-brand-primary text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-colors border border-white/20 px-6 py-4 hover:bg-brand-primary/10 hover:border-brand-primary w-full md:w-auto mt-2 md:mt-0">
+                <a href="/work" class="hidden md:flex font-mono text-brand-light hover:text-brand-primary text-sm tracking-widest uppercase items-center justify-center gap-2 transition-colors border border-white/20 px-6 py-4 hover:bg-brand-primary/10 hover:border-brand-primary w-full md:w-auto mt-2 md:mt-0">
                     [ VIEW ALL CASE STUDIES ]
                 </a>
             )}
@@ -39,7 +39,7 @@ if (filterTag) {
             {displayProjects.map((project) => (
                 <a href={`/work/${project.id.replace('.md','')}`} class="group relative bg-brand-dark hover:bg-brand-mid/50 border border-white/10 transition-all duration-500 overflow-hidden block hover:border-brand-primary/50">
                     <div class="aspect-[16/10] overflow-hidden relative border-b border-white/10">
-                        <div class="absolute inset-0 bg-brand-dark/40 mix-blend-multiply group-hover:bg-transparent transition-all duration-500 z-10"></div>
+                        <div class="absolute inset-0 bg-transparent md:bg-brand-dark/40 mix-blend-multiply group-hover:bg-transparent transition-all duration-500 z-10"></div>
                         <img 
                             src={project.data.image} 
                             alt={project.data.title} 
@@ -50,12 +50,26 @@ if (filterTag) {
                     <div class="p-8 flex justify-between items-start bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:1rem_1rem]">
                         <div>
                             <p class="font-mono text-brand-primary/60 tracking-widest text-xs mb-2 uppercase group-hover:text-brand-primary transition-colors">{project.data.clientType}</p>
-                            <h3 class="text-2xl font-bold text-white uppercase">{project.data.title}</h3>
+                            <h3 class="text-2xl font-bold text-white uppercase mb-4">{project.data.title}</h3>
+                            <div class="inline-flex items-center gap-3 font-mono text-brand-primary text-xs tracking-widest uppercase group-hover:text-white transition-colors border-b border-brand-primary/30 pb-1 w-max">
+                                [ READ CASE STUDY ]
+                                <svg class="w-4 h-4 translate-x-0 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </div>
                         </div>
                         <div class="font-mono text-xs text-brand-primary px-3 py-1 border border-brand-primary/20 bg-brand-primary/5 mt-1 hidden sm:block">ACTIVE</div>
                     </div>
                 </a>
             ))}
         </div>
+
+        {limit !== false && (
+            <div class="mt-8 flex md:hidden w-full">
+                <a href="/work" class="font-mono text-brand-light hover:text-brand-primary text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-colors border border-white/20 px-6 py-4 bg-brand-dark hover:bg-brand-primary/10 hover:border-brand-primary w-full text-center">
+                    [ VIEW ALL CASE STUDIES ]
+                </a>
+            </div>
+        )}
     </div>
 </section>
